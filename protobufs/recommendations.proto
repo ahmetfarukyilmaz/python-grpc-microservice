@@ -29,12 +29,13 @@ enum BookCategory {
   WAR = 25;
   WESTERN = 26;
   OTHER = 27;
+  SELF_HELP = 28;
 }
 
 
-message BookRecomendation {
+message BookRecommendation {
   int32 id = 1;
-  string name = 2;
+  string title = 2;
 }
 
 message RecommendationRequest {
@@ -44,7 +45,7 @@ message RecommendationRequest {
 }
 
 message RecommendationResponse {
-    repeated BookRecomendation recommendations = 1;
+    repeated BookRecommendation recommendations = 1;
 }
 
 service Recommendations {
