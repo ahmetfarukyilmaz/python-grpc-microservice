@@ -1,5 +1,6 @@
 import random
 from concurrent import futures
+from signal import SIGTERM, signal
 
 import grpc
 
@@ -42,6 +43,14 @@ def serve():
     server.add_insecure_port("[::]:50051")
     server.start()
     print("Server started at [::]:50051")
+
+    def handle_sigterm(*_):
+        print("Received SIGTERM, shutting down server")
+        all_rpcs_done = server.stop(30)
+        all_rpcs_done.wait(30)
+        print("Server shut down gracefully")
+
+    signal(SIGTERM, handle_sigterm)
     server.wait_for_termination()
 
 
