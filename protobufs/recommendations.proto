@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+enum BookCategory {
+  FANTASY = 0;
+  SCIENCE_FICTION = 1;
+  ROMANCE = 2;
+  HORROR = 3;
+  MYSTERY = 4;
+  THRILLER = 5;
+  DRAMA = 6;
+  COMEDY = 7;
+  CRIME = 8;
+  ACTION = 9;
+  ADVENTURE = 10;
+  ANIMATION = 11;
+  BIOGRAPHY = 12;
+  GUIDE = 13;
+  HISTORY = 14;
+  HUMOR = 15;
+  MYSTIC = 16;
+  PHILOSOPHY = 17;
+  POLITICS = 18;
+  RELIGION = 19;
+  ROYALITY = 20;
+  SCIENCE = 21;
+  SOCIETY = 22;
+  SPORT = 23;
+  TRAVEL = 24;
+  WAR = 25;
+  WESTERN = 26;
+  OTHER = 27;
+}
+
+
+message BookRecomendation {
+  int32 id = 1;
+  string name = 2;
+}
+
+message RecommendationRequest {
+    int32 user_id = 1;
+    BookCategory category = 2;
+    int32 max_results = 3;
+}
+
+message RecommendationResponse {
+    repeated BookRecomendation recommendations = 1;
+}
+
+service Recommendations {
+    rpc Recommend (RecommendationRequest) returns (RecommendationResponse);
+}
+
+
